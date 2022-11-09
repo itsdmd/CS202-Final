@@ -13,7 +13,7 @@
 
 
 # Contribute
-1. On [GitHub website](https://github.com/itsdmd/CS202-Final), go to **Issues**.
+1. On [GitHub website](https://github.com/itsdmd/CS202-Final), go to [**Issues**](https://github.com/itsdmd/CS202-Final/issues).
 
 2. Find an issue you want to work on. If it's not there, create one.
 
