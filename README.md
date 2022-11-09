@@ -33,6 +33,6 @@
 
 ![](doc/res/ghd-switch-branch.png)
 
-7. After finish editing, create a PR (remember to commit and push all changes).
+7. After finish editing, commit and push all changes. After that, create a PR.
 
 ![](doc/res/ghd-create-pr.png)
