@@ -40,3 +40,17 @@
 8. Remove `wip` label and add `pending` label.
 
 ![](doc/res/gh-pending-label.png)
+
+
+# Merge updates from **main** branch
+
+![](doc/res/gh-merge-1.png)
+
+
+![](doc/res/gh-merge-2.png)
+
+
+![](doc/res/gh-merge-3.png)
+
+
+![](doc/res/gh-merge-4.png)
