@@ -5,9 +5,11 @@ namespace ReplaceRule
 	public class Replace : IRule
 	{
 		public string Name => "Replace";
-		
-		private string From = "";
-		private string To = "";
+
+		public string Config => $"{From} => {To}";
+
+		private string From = "from";
+		private string To = "to";
 		public string Parse
 		{
 			set

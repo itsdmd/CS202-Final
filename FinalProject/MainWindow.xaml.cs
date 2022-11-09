@@ -7,64 +7,149 @@ using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
 
 namespace FinalProject
 {
 	public partial class MainWindow : Window
 	{
+		public ObservableCollection<object> _originals = new ObservableCollection<object>();
+		public ObservableCollection<object> _previews = new ObservableCollection<object>();
+		public ObservableCollection<object> _availableRules = new ObservableCollection<object>();
+		public ObservableCollection<object> _selectedRules = new ObservableCollection<object>();
+
+		RuleFactory f = new RuleFactory();
+		dynamic selectedRuleFromAvailable = null;
+		dynamic selectedRuleFromPreview = null;
+
 		public MainWindow()
 		{
 			InitializeComponent();
 		}
 
-		public ObservableCollection<object> _originals = new ObservableCollection<object>();
-		public ObservableCollection<object> _previews = new ObservableCollection<object>();
-		RuleFactory f = new RuleFactory();
-
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			filesListView.ItemsSource = _originals;
 			previewListView.ItemsSource = _previews;
+
+			// Load .dll file to show available rules in menu
+			DLLReader dllReader = new DLLReader();
+
+			foreach (var rule in dllReader.GetRuleDict())
+			{
+				var item = new
+				{
+					RuleName = rule.Value.Name,
+					RuleConfig = rule.Value.Config
+				};
+
+				_availableRules.Add(item);
+			}
+
+			ruleSelectListView.ItemsSource = _availableRules;
+			rulePreviewListView.ItemsSource = _selectedRules;
+		}
+		
+		// Read rule file
+		private List<string> RuleFileReader(string ruleFilePath)
+		{
+			try
+			{
+				return new List<string>(File.ReadAllLines(ruleFilePath));
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Rule file not found", e.ToString());
+				return null;
+			}
+		}
+		
+		// Update factory's RuleString with elements in _selectedRules
+		private void UpdateFactory()
+		{
+			// Update converter
+			var converter = FindResource("converter")
+				as RawToRenamedConverter;
+			converter!.Factory = f;
+
+			List<string> newRuleAsStringList = new List<string>();
+			foreach (dynamic item in _selectedRules)
+			{
+				StringBuilder sb = new StringBuilder();
+				sb.Append(item.RuleName);
+				sb.Append(" ");
+				sb.Append(item.RuleConfig);
+
+				newRuleAsStringList.Add(sb.ToString());
+			}
+
+			f.RulesAsStringList = newRuleAsStringList;
+
+			UpdateFilePreviewList();
+		}
+		
+		// Update file preview list
+		private void UpdateFilePreviewList()
+		{
+			if (_originals.Count > 0)
+			{
+				_previews.Clear();
+
+				foreach (dynamic item in _originals)
+				{
+					_previews.Add(item);
+				}
+			}
 		}
 
-		private void selectRuleButton_Click(object sender, RoutedEventArgs e)
+		private void selectRulePresetButton_Click(object sender, RoutedEventArgs e)
 		{
 			var dialog = new OpenFileDialog();
-
+			
 			if (dialog.ShowDialog() == true)
 			{
 				var info = new FileInfo(dialog.FileName);
 
+				// Setup factory
+				var fileContent = RuleFileReader(dialog.FileName);
+				f.RulesAsStringList = fileContent;
+
 				// Display the rule file name to TextBox
 				ruleFileName.Text = info.Name;
 
-				f.RuleFilePath = info.FullName;
+				//Update rule preview list
+				_selectedRules.Clear();
 
-				var converter = FindResource("converter")
-					as RawToRenamedConverter;
-				converter!.Factory = f;
-
-				if (_originals.Count > 0)
+				foreach (var r in f.RuleList)
 				{
-					_previews.Clear();
-
-					foreach (dynamic item in _originals)
+					var item = new
 					{
-						_previews.Add(item);
-					}
+						RuleName = r.Name,
+						RuleConfig = r.Config
+					};
+					_selectedRules.Add(item);
 				}
+				rulePreviewListView.ItemsSource = _selectedRules;
+
+				UpdateFilePreviewList();
 			}
 		}
 
 		private void addFileButton_Click(object sender, RoutedEventArgs e)
 		{
 			var dialog = new OpenFileDialog();
-			
+
 			if (dialog.ShowDialog() == true)
 			{
 				// Skip if already added
-				if (_originals.Contains(dialog.FileName)) { return; }
-				
+				bool duplicated = false;
+				foreach (dynamic item in _originals)
+				{
+					if (item.FullPath == dialog.FileName) { duplicated = true; break; }
+				}
+				if (duplicated) return;
+
 				var info = new FileInfo(dialog.FileName);
 
 				var rawItem = new
@@ -81,20 +166,22 @@ namespace FinalProject
 		private void addFolderButton_Click(object sender, RoutedEventArgs e)
 		{
 			CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-			
+
 			dialog.InitialDirectory = "C:";
 			dialog.IsFolderPicker = true;
-			
+
 			if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
 			{
 				// Add all files in the folder
 				var files = Directory.GetFiles(dialog.FileName);
-				
+
 				foreach (var file in files)
 				{
 					// Skip if already added
-					if (_originals.Contains(dialog.FileName)) { return; }
-					
+					bool duplicated = false;
+					foreach (dynamic item in _originals) { if (item.FullPath == file) { duplicated = true; break; } }
+					if (duplicated) continue;
+
 					var info = new FileInfo(file);
 
 					var rawItem = new
@@ -111,13 +198,13 @@ namespace FinalProject
 
 		private void renameButton_Click(object sender, RoutedEventArgs e)
 		{
-			foreach(dynamic item in _originals)
+			foreach (dynamic item in _originals)
 			{
 				f.FileName = item.FileName;
-				
+
 				var info = new FileInfo(item.FullPath);
 				var folder = info.Directory;
-				
+
 				// If moveToSubDirCheckBox is checked, create a subdirectory called "renamed" and copy the files to it
 				if (moveToSubDirCheckBox.IsChecked == true)
 				{
@@ -139,8 +226,51 @@ namespace FinalProject
 					File.Move(item.FullPath, newPath);
 				}
 			}
-			
+
 			MessageBox.Show($"Renamed {_originals.Count} files");
+		}
+
+		private void ruleSelectListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+			// Update ruleConfig's text
+			selectedRuleFromAvailable = ruleSelectListView.SelectedItem;
+			ruleConfig.Text = selectedRuleFromAvailable.RuleConfig;
+		}
+
+		private void addRuleButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (ruleSelectListView.SelectedItem == null) { return; }
+			
+			_selectedRules.Add( new { RuleName = selectedRuleFromAvailable.RuleName,
+									  RuleConfig = ruleConfig.Text } );
+			
+			UpdateFactory();
+		}
+
+		private void ruleConfig_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		{
+			return;
+		}
+
+		private void rulePreviewListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+			return;
+		}
+
+		private void deleteRuleButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (rulePreviewListView.SelectedItem == null) { return; }
+			
+			int index = rulePreviewListView.SelectedIndex;
+			_selectedRules.RemoveAt(index);
+			rulePreviewListView.ItemsSource = _selectedRules;
+			
+			UpdateFactory();
+		}
+
+		private void selectSubFolderButton_Click(object sender, RoutedEventArgs e)
+		{
+			return;
 		}
 	}
 }

@@ -7,22 +7,39 @@ namespace RemoveSpecialCharsRule
 	{
 		public string Name => "RemoveSpecialChars";
 
-		public List<char> BlackList { get; set; } = new List<char>();
+		public string Config
+		{
+			get
+			{
+				StringBuilder sb = new StringBuilder();
+				
+				foreach (var item in BlackList)
+				{
+					sb.Append(item);
+				}
+
+				return sb.ToString();
+			}
+		}
+
+		public List<char> BlackList { get; set; } = new List<char>() { '-', '_' };
 		public string Parse
 		{
 			set
 			{
-				// Split string and add each character to BlackList (except for the first token)
-				var tokens = value.Split(' ');
-				for (int i = 1; i < tokens.Length; i++)
+				// Remove characters before the first ' '
+				int index = value.IndexOf(' ');
+				if (index > 0)
 				{
-					if (tokens[i].Length == 1)
+					value = value.Substring(index + 1);
+				}
+				
+				// Add each character from substring to BlackList
+				foreach (var item in value)
+				{
+					if (!BlackList.Contains(item))
 					{
-						BlackList.Add(tokens[i][0]);
-					}
-					else
-					{
-						throw new Exception("E: RemoveSpecialCharsRule: Each token should only be 1 character long");
+						BlackList.Add(item);
 					}
 				}
 			}
