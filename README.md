@@ -1,3 +1,5 @@
+> ### [Project Requirements](https://tdquang7.notion.site/Project-batch-rename-2022-9dc9eb9c9d674dbdb4a988a3794d1335)
+
 # Setup
 1. Use Visual Studio 2022 with **.NET 6.0** SDK installed.
 
