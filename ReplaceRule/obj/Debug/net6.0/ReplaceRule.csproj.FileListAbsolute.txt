@@ -1,0 +1,15 @@
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\bin\Debug\net6.0\ReplaceRule.deps.json
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\bin\Debug\net6.0\ReplaceRule.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\bin\Debug\net6.0\ReplaceRule.pdb
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\bin\Debug\net6.0\Contract.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\bin\Debug\net6.0\Contract.pdb
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\ReplaceRule.csproj.AssemblyReference.cache
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\ReplaceRule.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\ReplaceRule.AssemblyInfoInputs.cache
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\ReplaceRule.AssemblyInfo.cs
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\ReplaceRule.csproj.CoreCompileInputs.cache
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\ReplaceRule.csproj.CopyComplete
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\ReplaceRule.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\refint\ReplaceRule.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\ReplaceRule.pdb
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\ReplaceRule\obj\Debug\net6.0\ref\ReplaceRule.dll

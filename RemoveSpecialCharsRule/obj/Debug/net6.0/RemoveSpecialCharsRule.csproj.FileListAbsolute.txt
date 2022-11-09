@@ -1,0 +1,15 @@
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\bin\Debug\net6.0\RemoveSpecialCharsRule.deps.json
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\bin\Debug\net6.0\RemoveSpecialCharsRule.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\bin\Debug\net6.0\RemoveSpecialCharsRule.pdb
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\bin\Debug\net6.0\Contract.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\bin\Debug\net6.0\Contract.pdb
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\RemoveSpecialCharsRule.csproj.AssemblyReference.cache
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\RemoveSpecialCharsRule.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\RemoveSpecialCharsRule.AssemblyInfoInputs.cache
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\RemoveSpecialCharsRule.AssemblyInfo.cs
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\RemoveSpecialCharsRule.csproj.CoreCompileInputs.cache
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\RemoveSpecialCharsRule.csproj.CopyComplete
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\RemoveSpecialCharsRule.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\refint\RemoveSpecialCharsRule.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\RemoveSpecialCharsRule.pdb
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\RemoveSpecialCharsRule\obj\Debug\net6.0\ref\RemoveSpecialCharsRule.dll

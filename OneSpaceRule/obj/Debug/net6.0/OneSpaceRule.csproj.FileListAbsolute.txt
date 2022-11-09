@@ -1,0 +1,15 @@
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\bin\Debug\net6.0\OneSpaceRule.deps.json
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\bin\Debug\net6.0\OneSpaceRule.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\bin\Debug\net6.0\OneSpaceRule.pdb
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\bin\Debug\net6.0\Contract.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\bin\Debug\net6.0\Contract.pdb
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\OneSpaceRule.csproj.AssemblyReference.cache
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\OneSpaceRule.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\OneSpaceRule.AssemblyInfoInputs.cache
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\OneSpaceRule.AssemblyInfo.cs
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\OneSpaceRule.csproj.CoreCompileInputs.cache
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\OneSpaceRule.csproj.CopyComplete
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\OneSpaceRule.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\refint\OneSpaceRule.dll
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\OneSpaceRule.pdb
+C:\Users\itsdmd\Documents\GitHub\University\CS202\T\FinalProject\OneSpaceRule\obj\Debug\net6.0\ref\OneSpaceRule.dll
