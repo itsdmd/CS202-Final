@@ -1,3 +1,3 @@
-﻿RemoveSpecialChars - _
+﻿RemoveSpecialChars -_
 OneSpace
 AddPrefix XYZ
