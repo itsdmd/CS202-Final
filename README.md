@@ -36,3 +36,7 @@
 7. After finish editing, commit and push all changes. After that, create a PR.
 
 ![](doc/res/ghd-create-pr.png)
+
+8. Remove `wip` label and add `pending` label.
+
+![](doc/res/gh-pending-label.png)
