@@ -1,0 +1,15 @@
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\bin\Debug\net6.0\AddSuffixRule.deps.json
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\bin\Debug\net6.0\AddSuffixRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\bin\Debug\net6.0\AddSuffixRule.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\bin\Debug\net6.0\Contract.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\bin\Debug\net6.0\Contract.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\AddSuffixRule.csproj.AssemblyReference.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\AddSuffixRule.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\AddSuffixRule.AssemblyInfoInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\AddSuffixRule.AssemblyInfo.cs
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\AddSuffixRule.csproj.CoreCompileInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\AddSuffixRule.csproj.CopyComplete
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\AddSuffixRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\refint\AddSuffixRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\AddSuffixRule.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\AddSuffixRule\obj\Debug\net6.0\ref\AddSuffixRule.dll
