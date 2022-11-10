@@ -1,0 +1,15 @@
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\bin\Debug\net6.0\RemoveSpacesRule.deps.json
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\bin\Debug\net6.0\RemoveSpacesRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\bin\Debug\net6.0\RemoveSpacesRule.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\bin\Debug\net6.0\Contract.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\bin\Debug\net6.0\Contract.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\RemoveSpacesRule.csproj.AssemblyReference.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\RemoveSpacesRule.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\RemoveSpacesRule.AssemblyInfoInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\RemoveSpacesRule.AssemblyInfo.cs
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\RemoveSpacesRule.csproj.CoreCompileInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\RemoveSpacesRule.csproj.CopyComplete
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\RemoveSpacesRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\refint\RemoveSpacesRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\RemoveSpacesRule.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\RemoveSpacesRule\obj\Debug\net6.0\ref\RemoveSpacesRule.dll
