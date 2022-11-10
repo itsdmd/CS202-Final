@@ -6,5 +6,6 @@
 		string Config { get; }
 		string Parse { set; }
 		string Rename(string origin);
+		object Clone();
 	}
 }

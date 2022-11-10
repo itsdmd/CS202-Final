@@ -9,6 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Documents;
 
 namespace FinalProject
 {
@@ -22,8 +23,8 @@ namespace FinalProject
 		RuleFactory f = new RuleFactory();
 		dynamic selectedRuleFromAvailable = null;
 		dynamic selectedRuleFromPreview = null;
-
-		string anotherFolderFullPath = "";
+		
+		string destinationFolderFullPath = "";
 
 		public MainWindow()
 		{
@@ -52,6 +53,12 @@ namespace FinalProject
 			ruleSelectListView.ItemsSource = _availableRules;
 			rulePreviewListView.ItemsSource = _selectedRules;
 		}
+
+
+		
+		// ========================================
+		// ========== Build-in functions ==========
+		// ========================================
 		
 		// Read rule file
 		private List<string> RuleFileReader(string ruleFilePath)
@@ -66,32 +73,9 @@ namespace FinalProject
 				return null;
 			}
 		}
+
 		
-		// Update factory's RuleString with elements in _selectedRules
-		private void UpdateFactory()
-		{
-			// Update converter
-			var converter = FindResource("converter")
-				as RawToRenamedConverter;
-			converter!.Factory = f;
-
-			List<string> newRuleAsStringList = new List<string>();
-			foreach (dynamic item in _selectedRules)
-			{
-				StringBuilder sb = new StringBuilder();
-				sb.Append(item.RuleName);
-				sb.Append(" ");
-				sb.Append(item.RuleConfig);
-
-				newRuleAsStringList.Add(sb.ToString());
-			}
-
-			f.RulesAsStringList = newRuleAsStringList;
-
-			UpdateFilePreviewList();
-		}
-		
-		// Update file preview list
+		// Update file preview list (intergrated inside UpdateFactory)
 		private void UpdateFilePreviewList()
 		{
 			if (_originals.Count > 0)
@@ -105,39 +89,40 @@ namespace FinalProject
 			}
 		}
 
-		private void selectRulePresetButton_Click(object sender, RoutedEventArgs e)
+		
+		// Update factory's RuleString with elements in _selectedRules
+		private void UpdateFactory()
 		{
-			var dialog = new OpenFileDialog();
-			
-			if (dialog.ShowDialog() == true)
+			List<IRule> newRuleList = new List<IRule>();
+
+			foreach (dynamic item in _selectedRules)
 			{
-				var info = new FileInfo(dialog.FileName);
+				StringBuilder sb = new StringBuilder();
+				sb.Append(item.RuleName)
+					.Append(" ")
+					.Append(item.RuleConfig);
 
-				// Setup factory
-				var fileContent = RuleFileReader(dialog.FileName);
-				f.RulesAsStringList = fileContent;
-
-				// Display the rule file name to TextBox
-				ruleFileName.Text = info.Name;
-
-				//Update rule preview list
-				_selectedRules.Clear();
-
-				foreach (var r in f.RuleList)
-				{
-					var item = new
-					{
-						RuleName = r.Name,
-						RuleConfig = r.Config
-					};
-					_selectedRules.Add(item);
-				}
-				rulePreviewListView.ItemsSource = _selectedRules;
-
-				UpdateFilePreviewList();
+				IRule newRule = f.StringToIRuleConverter(sb.ToString());
+				newRuleList.Add(newRule);
 			}
+
+			f.RuleList = newRuleList;
+
+			// Update converter and filePreviewList
+			var converter = FindResource("converter") as RawToRenamedConverter;
+			converter!.Factory = f;
+
+			UpdateFilePreviewList();
 		}
 
+
+		
+		// ====================================
+		// ========== File selection ==========
+		// ====================================
+
+		
+		// Add file to be renamed
 		private void addFileButton_Click(object sender, RoutedEventArgs e)
 		{
 			var dialog = new OpenFileDialog();
@@ -164,7 +149,9 @@ namespace FinalProject
 				_previews.Add(rawItem);
 			}
 		}
-
+		
+		
+		// Remove added file from list
 		private void removeFileButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (filesListView.SelectedIndex != -1)
@@ -176,6 +163,8 @@ namespace FinalProject
 			}
 		}
 
+		
+		// Add all files inside a folder
 		private void addFolderButton_Click(object sender, RoutedEventArgs e)
 		{
 			CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -209,6 +198,56 @@ namespace FinalProject
 			}
 		}
 
+
+
+		// ===================================
+		// ========== Rules configs ==========
+		// ===================================
+
+		// Select preset file
+		private void selectRulePresetButton_Click(object sender, RoutedEventArgs e)
+		{
+			var dialog = new OpenFileDialog();
+
+			if (dialog.ShowDialog() == true)
+			{
+				var info = new FileInfo(dialog.FileName);
+
+				// Setup factory
+				var fileContent = RuleFileReader(dialog.FileName);
+
+				List<IRule> newRuleList = new List<IRule>();
+				foreach (string line in fileContent)
+				{
+					newRuleList.Add(f.StringToIRuleConverter(line));
+				}
+				f.RuleList = newRuleList;
+
+			// Display the rule file name to TextBox
+			ruleFileName.Text = info.Name;
+
+				//Update rule preview list
+				_selectedRules.Clear();
+
+				foreach (var r in f.RuleList)
+				{
+					if (r == null) continue;
+
+					var item = new
+					{
+						RuleName = r.Name,
+						RuleConfig = r.Config
+					};
+					_selectedRules.Add(item);
+				}
+				rulePreviewListView.ItemsSource = _selectedRules;
+
+				UpdateFactory();
+			}
+		}
+
+
+		// Selection in available rule list changed
 		private void ruleSelectListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
 			// Update ruleConfigTextBox's text
@@ -216,9 +255,10 @@ namespace FinalProject
 			ruleConfigTextBox.Text = selectedRuleFromAvailable.RuleConfig;
 		}
 
+		// Add selected rule to rule preview list
 		private void addRuleButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (ruleSelectListView.SelectedItem == null) { return; }
+			if (selectedRuleFromAvailable == null) { return; }
 			
 			_selectedRules.Add( new { RuleName = selectedRuleFromAvailable.RuleName,
 									  RuleConfig = ruleConfigTextBox.Text } );
@@ -226,16 +266,22 @@ namespace FinalProject
 			UpdateFactory();
 		}
 
+		
+		// Text inside ruleConfigTextBox was modified
 		private void ruleConfigTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
 		{
 			return;
 		}
 
+		
+		// Remove selected rule from rule preview list
 		private void rulePreviewListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
 			return;
 		}
 
+		
+		// Move selected rule in rule preview list up
 		private void moveRuleUpButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (rulePreviewListView.SelectedItem == null) { return; }
@@ -248,11 +294,13 @@ namespace FinalProject
 				_selectedRules[index - 1] = _selectedRules[index];
 				_selectedRules[index] = temp;
 
-				UpdateFactory();
 				rulePreviewListView.ItemsSource = _selectedRules;
+				UpdateFactory();
 			}
 		}
 
+		
+		// Move selected rule in rule preview list down
 		private void moveRuleDownButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (rulePreviewListView.SelectedItem == null) { return; }
@@ -265,27 +313,53 @@ namespace FinalProject
 				_selectedRules[index + 1] = _selectedRules[index];
 				_selectedRules[index] = temp;
 
-				UpdateFactory();
 				rulePreviewListView.ItemsSource = _selectedRules;
+				UpdateFactory();
 			}
 		}
 
-		private void editRuleButton_Click(object sender, RoutedEventArgs e)
+		
+		// Open dialog to edit rule config
+		private void editRulePreviewItemContextMenu_Click(object sender, RoutedEventArgs e)
 		{
-			return;
+			int index = rulePreviewListView.SelectedIndex;
+			IRule selection = f.RuleList[index];
+
+			var screen = new EditRuleWindow(selection);
+
+			if (screen.ShowDialog() == true)
+			{
+				_selectedRules[index] = new
+				{
+					RuleName = screen.ReturnData.Name,
+					RuleConfig = screen.ReturnData.Config
+				};
+
+				rulePreviewListView.ItemsSource = _selectedRules;
+				UpdateFactory();
+			}
 		}
 
-		private void deleteRuleButton_Click(object sender, RoutedEventArgs e)
+		
+		// Remove selected rule from rule preview list
+		private void deleteRulePreviewItemContextMenu_Click(object sender, RoutedEventArgs e)
 		{
 			if (rulePreviewListView.SelectedItem == null) { return; }
-			
+
 			int index = rulePreviewListView.SelectedIndex;
 			_selectedRules.RemoveAt(index);
-			rulePreviewListView.ItemsSource = _selectedRules;
 			
+			rulePreviewListView.ItemsSource = _selectedRules;
 			UpdateFactory();
 		}
 
+
+
+		// ========================================
+		// ========== Renaming execution ==========
+		// ========================================
+		
+		// Open dialog to select a destination folder to save renamed file to
 		private void selectDestinationFolderButton_Click(object sender, RoutedEventArgs e)
 		{
 			CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -295,16 +369,20 @@ namespace FinalProject
 
 			if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
 			{
-				anotherFolderFullPath = dialog.FileName;
-				anotherFolderPathTextBlock.Text = anotherFolderFullPath;
+				destinationFolderFullPath = dialog.FileName;
+				destinationFolderPathTextBlock.Text = destinationFolderFullPath;
 			}
 		}
+
 		
-		private void anotherFolderPathTextBlock_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		// Text inside destinationFolderPathTextBlock was modified
+		private void destinationFolderPathTextBlock_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
 		{
-			anotherFolderFullPath = anotherFolderPathTextBlock.Text;
+			destinationFolderFullPath = destinationFolderPathTextBlock.Text;
 		}
+
 		
+		// Start renaming
 		private void renameButton_Click(object sender, RoutedEventArgs e)
 		{
 			foreach (dynamic item in _originals)
@@ -317,19 +395,19 @@ namespace FinalProject
 				// If moveToAnotherFolderCheckBox is checked, create a subdirectory called "renamed" and copy the files to it
 				if (moveToAnotherFolderCheckBox.IsChecked == true)
 				{
-					if (anotherFolderFullPath == "")
+					if (destinationFolderFullPath == "")
 					{
 						MessageBox.Show("Please select a folder to move the renamed files to.");
 						return;
 					}
 					try
 					{
-						var newPath = $"{anotherFolderFullPath}\\{f.Parse()}";
+						var newPath = $"{destinationFolderFullPath}\\{f.Parse()}";
 						File.Copy(item.FullPath, newPath);
 					}
 					catch
 					{
-						folder = Directory.CreateDirectory(anotherFolderFullPath);
+						folder = Directory.CreateDirectory(destinationFolderFullPath);
 						
 						var newPath = $"{folder}\\{f.Parse()}";
 						File.Copy(item.FullPath, newPath);
@@ -343,16 +421,6 @@ namespace FinalProject
 			}
 
 			MessageBox.Show($"Renamed {_originals.Count} files");
-		}
-
-		private void selectSubFolderButton_Click(object sender, RoutedEventArgs e)
-		{
-			return;
-		}
-
-		private void ruleConfigTextBoxTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-		{
-
 		}
 	}
 }

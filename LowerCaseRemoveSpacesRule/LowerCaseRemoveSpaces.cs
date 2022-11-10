@@ -16,5 +16,10 @@ namespace LowerCaseRemoveSpacesRule
 			origin = origin.Replace(" ", "");
 			return origin;
 		}
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
 	}
 }

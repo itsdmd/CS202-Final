@@ -25,5 +25,10 @@ namespace AddSuffixRule
 			var index = origin.LastIndexOf('.');
 			return origin.Insert(index, (" " + Suffix));
 		}
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
 	}
 }

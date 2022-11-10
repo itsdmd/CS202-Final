@@ -14,5 +14,10 @@ namespace OneSpaceRule
 		{
 			return (string.Join(" ", inp.Split(" ", StringSplitOptions.RemoveEmptyEntries)));
 		}
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
 	}
 }
