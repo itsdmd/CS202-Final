@@ -23,6 +23,8 @@ namespace FinalProject
 		dynamic selectedRuleFromAvailable = null;
 		dynamic selectedRuleFromPreview = null;
 
+		string anotherFolderFullPath = "";
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -163,6 +165,17 @@ namespace FinalProject
 			}
 		}
 
+		private void removeFileButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (filesListView.SelectedIndex != -1)
+			{
+				_originals.RemoveAt(filesListView.SelectedIndex);
+
+				_previews.Clear();
+				foreach (var item in _originals) { _previews.Add(item); }
+			}
+		}
+
 		private void addFolderButton_Click(object sender, RoutedEventArgs e)
 		{
 			CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -196,45 +209,11 @@ namespace FinalProject
 			}
 		}
 
-		private void renameButton_Click(object sender, RoutedEventArgs e)
-		{
-			foreach (dynamic item in _originals)
-			{
-				f.FileName = item.FileName;
-
-				var info = new FileInfo(item.FullPath);
-				var folder = info.Directory;
-
-				// If moveToSubDirCheckBox is checked, create a subdirectory called "renamed" and copy the files to it
-				if (moveToSubDirCheckBox.IsChecked == true)
-				{
-					try
-					{
-						var newPath = $"{folder}\\renamed\\{f.Parse()}";
-						File.Copy(item.FullPath, newPath);
-					}
-					catch
-					{
-						folder = Directory.CreateDirectory(folder.FullName + "\\renamed");
-						var newPath = $"{folder}\\{f.Parse()}";
-						File.Copy(item.FullPath, newPath);
-					}
-				}
-				else
-				{
-					var newPath = $"{folder}\\{f.Parse()}";
-					File.Move(item.FullPath, newPath);
-				}
-			}
-
-			MessageBox.Show($"Renamed {_originals.Count} files");
-		}
-
 		private void ruleSelectListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
-			// Update ruleConfig's text
+			// Update ruleConfigTextBox's text
 			selectedRuleFromAvailable = ruleSelectListView.SelectedItem;
-			ruleConfig.Text = selectedRuleFromAvailable.RuleConfig;
+			ruleConfigTextBox.Text = selectedRuleFromAvailable.RuleConfig;
 		}
 
 		private void addRuleButton_Click(object sender, RoutedEventArgs e)
@@ -242,17 +221,56 @@ namespace FinalProject
 			if (ruleSelectListView.SelectedItem == null) { return; }
 			
 			_selectedRules.Add( new { RuleName = selectedRuleFromAvailable.RuleName,
-									  RuleConfig = ruleConfig.Text } );
+									  RuleConfig = ruleConfigTextBox.Text } );
 			
 			UpdateFactory();
 		}
 
-		private void ruleConfig_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		private void ruleConfigTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
 		{
 			return;
 		}
 
 		private void rulePreviewListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+			return;
+		}
+
+		private void moveRuleUpButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (rulePreviewListView.SelectedItem == null) { return; }
+
+			int index = rulePreviewListView.SelectedIndex;
+			if (index == 0) { return; }
+			else
+			{
+				var temp = _selectedRules[index - 1];
+				_selectedRules[index - 1] = _selectedRules[index];
+				_selectedRules[index] = temp;
+
+				UpdateFactory();
+				rulePreviewListView.ItemsSource = _selectedRules;
+			}
+		}
+
+		private void moveRuleDownButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (rulePreviewListView.SelectedItem == null) { return; }
+
+			int index = rulePreviewListView.SelectedIndex;
+			if (index == _selectedRules.Count - 1) { return; }
+			else
+			{
+				var temp = _selectedRules[index + 1];
+				_selectedRules[index + 1] = _selectedRules[index];
+				_selectedRules[index] = temp;
+
+				UpdateFactory();
+				rulePreviewListView.ItemsSource = _selectedRules;
+			}
+		}
+
+		private void editRuleButton_Click(object sender, RoutedEventArgs e)
 		{
 			return;
 		}
@@ -268,9 +286,73 @@ namespace FinalProject
 			UpdateFactory();
 		}
 
+		private void selectDestinationFolderButton_Click(object sender, RoutedEventArgs e)
+		{
+			CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+
+			dialog.InitialDirectory = "C:";
+			dialog.IsFolderPicker = true;
+
+			if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+			{
+				anotherFolderFullPath = dialog.FileName;
+				anotherFolderPathTextBlock.Text = anotherFolderFullPath;
+			}
+		}
+		
+		private void anotherFolderPathTextBlock_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		{
+			anotherFolderFullPath = anotherFolderPathTextBlock.Text;
+		}
+		
+		private void renameButton_Click(object sender, RoutedEventArgs e)
+		{
+			foreach (dynamic item in _originals)
+			{
+				f.FileName = item.FileName;
+
+				var info = new FileInfo(item.FullPath);
+				var folder = info.Directory;
+
+				// If moveToAnotherFolderCheckBox is checked, create a subdirectory called "renamed" and copy the files to it
+				if (moveToAnotherFolderCheckBox.IsChecked == true)
+				{
+					if (anotherFolderFullPath == "")
+					{
+						MessageBox.Show("Please select a folder to move the renamed files to.");
+						return;
+					}
+					try
+					{
+						var newPath = $"{anotherFolderFullPath}\\{f.Parse()}";
+						File.Copy(item.FullPath, newPath);
+					}
+					catch
+					{
+						folder = Directory.CreateDirectory(anotherFolderFullPath);
+						
+						var newPath = $"{folder}\\{f.Parse()}";
+						File.Copy(item.FullPath, newPath);
+					}
+				}
+				else
+				{
+					var newPath = $"{folder}\\{f.Parse()}";
+					File.Move(item.FullPath, newPath);
+				}
+			}
+
+			MessageBox.Show($"Renamed {_originals.Count} files");
+		}
+
 		private void selectSubFolderButton_Click(object sender, RoutedEventArgs e)
 		{
 			return;
+		}
+
+		private void ruleConfigTextBoxTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		{
+
 		}
 	}
 }

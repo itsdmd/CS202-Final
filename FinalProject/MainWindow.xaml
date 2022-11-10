@@ -14,10 +14,10 @@
 				   FontSize="50" FontWeight="Bold" Canvas.Left="58" Canvas.Top="74"/>
 
 		<TextBlock Text="Rules"
-				   FontSize="50" FontWeight="Bold" Canvas.Left="430" Canvas.Top="74" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+				   FontSize="50" FontWeight="Bold" Canvas.Left="440" Canvas.Top="74" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<TextBlock Text="To"
-				   FontSize="50" FontWeight="Bold" Canvas.Left="909" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+				   FontSize="50" FontWeight="Bold" Canvas.Left="909" Canvas.Top="79" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
 		<ListView x:Name="filesListView"
 				  Width="300" Height="500" Canvas.Left="58" Canvas.Top="146" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -31,14 +31,17 @@
 		<Button x:Name="addFileButton" Content="Add File" Click="addFileButton_Click"
 				Width="100" Height="50" Canvas.Left="58" Canvas.Top="674" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
+		<Button x:Name="removeFileButton" Content="Remove File" Click="removeFileButton_Click"
+				Width="100" Height="50" Canvas.Left="158" Canvas.Top="674" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
 		<Button x:Name="addFolderButton" Content="Add Folder" Click="addFolderButton_Click"
 				Width="100" Height="50" Canvas.Left="258" Canvas.Top="674" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<Button x:Name="selectRulePresetButton" Content="Select Rule Preset File" Click="selectRulePresetButton_Click"
-				Width="150" Height="30" Canvas.Left="441" Canvas.Top="146" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+				Width="150" Height="30" Canvas.Left="428" Canvas.Top="146" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<TextBlock x:Name="ruleFileName" FontSize="17"
-				 Width="150" Height="20" Canvas.Left="441" Canvas.Top="176" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+				 Width="150" Height="20" Canvas.Left="428" Canvas.Top="176" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<ListView Name="ruleSelectListView" d:ItemsSource="{d:SampleData}" SelectionChanged="ruleSelectListView_SelectionChanged"
 				  Width="220" Height="120" HorizontalAlignment="Center" Canvas.Top="213" VerticalAlignment="Top" Canvas.Left="406" >
@@ -55,14 +58,14 @@
 			</ListView.ItemTemplate>
 		</ListView>
 
-		<TextBox x:Name="ruleConfig" TextChanged="ruleConfig_TextChanged"
-				 Width="220" Canvas.Left="406" Canvas.Top="338" Height="41" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+		<TextBox x:Name="ruleConfigTextBox"
+				 HorizontalAlignment="Center" VerticalAlignment="Top" Width="220" Canvas.Left="406" Canvas.Top="341" Height="32"/>
 
-		<Button x:Name="addRuleButton" Content="Add" Click="addRuleButton_Click"
-				Width="100" Height="24" Canvas.Left="466" Canvas.Top="384" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+		<Button x:Name="addRuleButton" Content="Add Rule" Click="addRuleButton_Click"
+				Width="100" Height="26" Canvas.Left="466" Canvas.Top="378" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 		<ListView Name="rulePreviewListView" d:ItemsSource="{d:SampleData}" SelectionChanged="rulePreviewListView_SelectionChanged"
-				  Width="220" Height="186" HorizontalAlignment="Center" Canvas.Top="430" VerticalAlignment="Top" Canvas.Left="406" >
+				  Width="220" Height="150" HorizontalAlignment="Center" Canvas.Top="430" VerticalAlignment="Top" Canvas.Left="406" >
 			<ListView.ItemsPanel>
 				<ItemsPanelTemplate>
 					<WrapPanel Orientation="Vertical"/>
@@ -71,17 +74,28 @@
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="{Binding RuleName}"/>
+						<TextBlock Text="{Binding RuleName}"
+								   Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 						<TextBlock Text=" - [ "/>
-						<TextBlock Text="{Binding RuleConfig}"/>
+						<TextBlock Text="{Binding RuleConfig}"
+								   Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 						<TextBlock Text=" ]"/>
 					</StackPanel>
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
 
+		<Button x:Name="moveRuleUpButton" Content="Move Up" Click="moveRuleUpButton_Click"
+				Width="100" Height="25" Canvas.Left="406" Canvas.Top="591" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+		<Button x:Name="moveRuleDownButton" Content="Move Down" Click="moveRuleDownButton_Click"
+				Width="100" Height="25" Canvas.Left="526" Canvas.Top="591" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.513,1.188"/>
+
+		<Button x:Name="editRuleButton" Content="Edit" Click="editRuleButton_Click"
+				Width="100" Height="25" Canvas.Left="406" Canvas.Top="621" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
 		<Button x:Name="deleteRuleButton" Content="Delete" Click="deleteRuleButton_Click"
-				Width="100" Height="25" Canvas.Left="466" Canvas.Top="621" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+				Width="100" Height="25" Canvas.Left="526" Canvas.Top="621" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
 		<ListView x:Name="previewListView"
 				  Width="300" Height="500"
@@ -93,13 +107,16 @@
 			</ListView.ItemTemplate>
 		</ListView>
 
-		<CheckBox x:Name="moveToSubDirCheckBox" Content="Move to a Sub Folder?"
+		<CheckBox x:Name="moveToAnotherFolderCheckBox" Content="Move to another folder?"
 				  Canvas.Left="664" Canvas.Top="669" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-		<Button x:Name="selectSubFolderButton" Content="Select Sub Folder" Click="selectSubFolderButton_Click"
-				Width="100" Height="25" Canvas.Left="664" Canvas.Top="689" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+		<TextBox x:Name="anotherFolderPathTextBlock" FontSize="17" TextChanged="anotherFolderPathTextBlock_TextChanged"
+				 Width="195" Height="30" Canvas.Left="664" Canvas.Top="689" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+		<Button x:Name="selectDestinationFolderButton" Content="Select Folder" Click="selectDestinationFolderButton_Click"
+				Width="100" Height="25" Canvas.Left="712" Canvas.Top="724" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<Button x:Name="renameButton" Content="Rename" Click="renameButton_Click"
-				Width="100" Height="50" Canvas.Left="864" Canvas.Top="669" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+				Width="100" Height="80" Canvas.Left="864" Canvas.Top="669" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 	</Canvas>
 </Window>
