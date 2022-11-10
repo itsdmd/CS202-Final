@@ -6,7 +6,9 @@ namespace AddPrefixRule
 	{
 		public string Name => "AddPrefix";
 		
-		private string Prefix = "";
+		public string Config => Prefix;
+		
+		private string Prefix = "prefix";
 		
 		public string Parse
 		{
