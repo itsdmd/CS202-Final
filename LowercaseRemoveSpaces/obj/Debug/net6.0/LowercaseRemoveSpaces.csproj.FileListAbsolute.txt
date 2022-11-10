@@ -1,0 +1,15 @@
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\bin\Debug\net6.0\LowercaseRemoveSpaces.deps.json
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\bin\Debug\net6.0\LowercaseRemoveSpaces.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\bin\Debug\net6.0\LowercaseRemoveSpaces.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\bin\Debug\net6.0\Contract.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\bin\Debug\net6.0\Contract.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\LowercaseRemoveSpaces.csproj.AssemblyReference.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\LowercaseRemoveSpaces.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\LowercaseRemoveSpaces.AssemblyInfoInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\LowercaseRemoveSpaces.AssemblyInfo.cs
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\LowercaseRemoveSpaces.csproj.CoreCompileInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\LowercaseRemoveSpaces.csproj.CopyComplete
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\LowercaseRemoveSpaces.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\refint\LowercaseRemoveSpaces.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\LowercaseRemoveSpaces.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\LowercaseRemoveSpaces\obj\Debug\net6.0\ref\LowercaseRemoveSpaces.dll
