@@ -1,0 +1,15 @@
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\bin\Debug\net6.0\PascalCaseRule.deps.json
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\bin\Debug\net6.0\PascalCaseRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\bin\Debug\net6.0\PascalCaseRule.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\bin\Debug\net6.0\Contract.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\bin\Debug\net6.0\Contract.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\PascalCaseRule.csproj.AssemblyReference.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\PascalCaseRule.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\PascalCaseRule.AssemblyInfoInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\PascalCaseRule.AssemblyInfo.cs
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\PascalCaseRule.csproj.CoreCompileInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\PascalCaseRule.csproj.CopyComplete
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\PascalCaseRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\refint\PascalCaseRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\PascalCaseRule.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\PascalCaseRule\obj\Debug\net6.0\ref\PascalCaseRule.dll
