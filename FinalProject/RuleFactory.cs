@@ -42,98 +42,54 @@ namespace FinalProject
 
 	public class RuleFactory
 	{
-		private static List<string> _ruleAsStringList = new List<string>();
-		private static string _fileName = new string("");
-		private static List<IRule> _ruleList = new List<IRule>();
+		private string _fileName = new string("");
+		private List<IRule> _ruleList = new List<IRule>();
+		private Dictionary<string, IRule> rulePrototypes = new DLLReader().GetRuleDict();
 
-		public string RulesAsString
-		{ 
-			get
+		public IRule StringToIRuleConverter(string inputStr)
+		{
+			try
 			{
-				StringBuilder sb = new StringBuilder();
-				
-				foreach (var item in _ruleAsStringList)
-				{
-					sb.Append(item);
-					sb.Append("\n");
-				}
-				
-				return sb.ToString();
+				IRule newIRule = rulePrototypes[inputStr.Split(' ')[0]].Clone() as IRule;
+
+				newIRule.Parse = inputStr;
+				return newIRule;
 			}
-			
-			set { _ruleAsStringList = value.Split('\n').ToList(); }
+			catch (KeyNotFoundException)
+			{
+				MessageBox.Show("Rule " + inputStr.Split(' ')[0] + " not found!");
+				return null;
+			}
 		}
-		
-		public List<string> RulesAsStringList { get => _ruleAsStringList; set => _ruleAsStringList = value; }
 		
 		public List<IRule> RuleList
 		{
-			get
-			{
-				_ruleList.Clear();
+			get => _ruleList;
 
-				Dictionary<string, IRule> rulePrototypes = new DLLReader().GetRuleDict();
-
-				foreach (string r in _ruleAsStringList)
-				{
-					string ruleName = r.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0];
-					if (ruleName == null || ruleName == "") { continue; }
-
-					IRule irule = null;
-
-					try
-					{
-						irule = rulePrototypes[ruleName];
-					}
-					catch (KeyNotFoundException)
-					{
-						MessageBox.Show("Rule " + ruleName + " not found!");
-						continue;
-					}
-
-					irule.Parse = r;
-					_ruleList.Add(irule);
-				}
-
-				return _ruleList;
-			}
+			set => _ruleList = value;
 		}
 		
+		public void ClearRuleList() => _ruleList.Clear();
+
+
+
 		public string FileName { set { _fileName = value; } }
 
-		
-		
 		public string Parse()
 		{
-			string renamed = _fileName;
-			_ruleList.Clear();
-
-			Dictionary<string, IRule> rulePrototypes = new DLLReader().GetRuleDict();
-
-			foreach (string r in _ruleAsStringList)
-			{
-				string ruleName = r.Split(" ", StringSplitOptions.RemoveEmptyEntries)[0];
-				if (ruleName == null || ruleName == "") { continue; }
-
-				IRule irule = null;
-
-				try
-				{
-					irule = rulePrototypes[ruleName];
-				}
-				catch (KeyNotFoundException)
-				{
-					MessageBox.Show("Rule " + ruleName + " not found!");
-					continue;
-				}
-
-				irule.Parse = r;
-				renamed = irule.Rename(renamed);
-
-				_ruleList.Add(irule);
-			}
+			if (_ruleList.Count == 0) { return _fileName; }
 			
-			return renamed;
+			else
+			{
+				string renamed = _fileName;
+
+				foreach (IRule irule in _ruleList)
+				{
+					renamed = irule.Rename(renamed);
+				}
+
+				return renamed;
+			}
 		}
 	}
 }

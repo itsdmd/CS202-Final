@@ -1,3 +1,10 @@
 ﻿Replace google => facebook
 OneSpace
 AddPrefix CV
+AddSuffix (draft)
+ChangeFileExtension md
+PascalCase
+RemoveSurroundingSpaces
+RemoveSpecialChars -_
+LowerCaseRemoveSpaces
+InvalidRule

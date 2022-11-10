@@ -66,5 +66,10 @@ namespace RemoveSpecialCharsRule
 
 			return result.ToString();
 		}
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
 	}
 }

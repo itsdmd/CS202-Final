@@ -26,5 +26,10 @@ namespace ReplaceRule
 		{
 			return (origin.Replace(From, To));
 		}
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
 	}
 }
