@@ -1,0 +1,15 @@
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\bin\Debug\net6.0\ChangeFileExtensionRule.deps.json
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\bin\Debug\net6.0\ChangeFileExtensionRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\bin\Debug\net6.0\ChangeFileExtensionRule.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\bin\Debug\net6.0\Contract.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\bin\Debug\net6.0\Contract.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\ChangeFileExtensionRule.csproj.AssemblyReference.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\ChangeFileExtensionRule.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\ChangeFileExtensionRule.AssemblyInfoInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\ChangeFileExtensionRule.AssemblyInfo.cs
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\ChangeFileExtensionRule.csproj.CoreCompileInputs.cache
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\ChangeFileExtensionRule.csproj.CopyComplete
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\ChangeFileExtensionRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\refint\ChangeFileExtensionRule.dll
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\ChangeFileExtensionRule.pdb
+D:\ITEC\CS202-AOOP\Final Project\CS202-Final\ChangeFileExtensionRule\obj\Debug\net6.0\ref\ChangeFileExtensionRule.dll
