@@ -1,3 +1,5 @@
+> ### [Project Requirements](https://tdquang7.notion.site/Project-batch-rename-2022-9dc9eb9c9d674dbdb4a988a3794d1335)
+
 # Setup
 1. Use Visual Studio 2022 with **.NET 7.0** installed.
 
@@ -5,15 +7,15 @@
 
 3. Open the project in VS.
 
-4. *Tools > NuGet Package Manager > Manage ... > Installed*.
+4. Make sure to use **Debug** build mode.
 
-5. Make sure to use **Debug** build mode.
+5. *Tools > NuGet Package Manager > Manage ... > Installed*.
 
 6. Check if `WindowsAPICodePack-Shell` had been installed for **FinalProject** (if not, install it).
 
 ![](doc/res/vs-nuget.png)
 
-7. Build the project. Copy all **.dll files** of every plugin into FinalProject's Debug folder (`FinalProject\bin\Debug\net6.0-windows`)
+7. ***Clean solution** > Build solution*. Copy all **.dll files** of every plugin into FinalProject's Debug folder (`FinalProject\bin\Debug\net6.0-windows`)
 
 8. Pray that it runs :smiling_face_with_tear:
 
