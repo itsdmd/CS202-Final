@@ -107,8 +107,15 @@
 				  HorizontalAlignment="Center" Canvas.Left="664" VerticalAlignment="Center" Canvas.Top="146">
 			<ListView.ItemTemplate>
 				<DataTemplate>
-					<TextBlock Text="{Binding FileName, Converter={StaticResource converter}}" />
-				</DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource converter}">
+                                <Binding Path="FileName"/>
+                                <Binding Path="ItemIndex"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
 

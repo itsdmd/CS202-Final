@@ -142,7 +142,8 @@ namespace FinalProject
 				var rawItem = new
 				{
 					FullPath = dialog.FileName,
-					FileName = info.Name
+					FileName = info.Name,
+					ItemIndex = _originals.Count
 				};
 
 				_originals.Add(rawItem);
@@ -189,8 +190,9 @@ namespace FinalProject
 					var rawItem = new
 					{
 						FullPath = file,
-						FileName = info.Name
-					};
+						FileName = info.Name,
+                        ItemIndex = _originals.Count
+                    };
 
 					_originals.Add(rawItem);
 					_previews.Add(rawItem);
@@ -388,6 +390,7 @@ namespace FinalProject
 			foreach (dynamic item in _originals)
 			{
 				f.FileName = item.FileName;
+				f.FileIndex = item.ItemIndex;
 
 				var info = new FileInfo(item.FullPath);
 				var folder = info.Directory;
