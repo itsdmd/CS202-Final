@@ -10,7 +10,7 @@ namespace RemoveSurroundingSpacesRule
 
 		public string Parse { get; set; }
 
-		public string Rename(string inp)
+		public string Rename(string inp, int fileIndex)
 		{
 			return inp.Trim();
 		}

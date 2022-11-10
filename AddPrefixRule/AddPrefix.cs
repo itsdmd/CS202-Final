@@ -20,7 +20,7 @@ namespace AddPrefixRule
 			}
 		}
 
-		public string Rename(string inp)
+		public string Rename(string inp, int fileIndex)
 		{
 			return (Prefix + " " + inp);
 		}
