@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Documents;
+using System.Diagnostics;
 
 namespace FinalProject
 {
@@ -26,7 +27,14 @@ namespace FinalProject
 		
 		string destinationFolderFullPath = "";
 
-		public MainWindow()
+		struct FileEntryInfo
+        {
+			public string FullPath { get; set; }
+			public string FileName { get; set; }
+			public int ItemIndex { get; set; }
+        }
+
+        public MainWindow()
 		{
 			InitializeComponent();
 		}
@@ -76,17 +84,19 @@ namespace FinalProject
 
 		
 		// Update file preview list (intergrated inside UpdateFactory)
-		private void UpdateFilePreviewList()
+		private void UpdateFilePreviewList(bool forced = false)
 		{
-			if (_originals.Count > 0)
+			if (_originals.Count > 0 || forced)
 			{
 				_previews.Clear();
 
+                int newIndex = 0;
 				foreach (dynamic item in _originals)
 				{
-					_previews.Add(item);
-				}
-			}
+					item.ItemIndex = newIndex++;
+                    _previews.Add(item);
+                }
+            }
 		}
 
 		
@@ -139,7 +149,7 @@ namespace FinalProject
 
 				var info = new FileInfo(dialog.FileName);
 
-				var rawItem = new
+				var rawItem = new FileEntryInfo
 				{
 					FullPath = dialog.FileName,
 					FileName = info.Name,
@@ -159,8 +169,7 @@ namespace FinalProject
 			{
 				_originals.RemoveAt(filesListView.SelectedIndex);
 
-				_previews.Clear();
-				foreach (var item in _originals) { _previews.Add(item); }
+				UpdateFilePreviewList(true);
 			}
 		}
 
@@ -187,7 +196,7 @@ namespace FinalProject
 
 					var info = new FileInfo(file);
 
-					var rawItem = new
+					var rawItem = new FileEntryInfo
 					{
 						FullPath = file,
 						FileName = info.Name,
