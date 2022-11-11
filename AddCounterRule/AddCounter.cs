@@ -1,5 +1,4 @@
 ﻿using Contract;
-using System.Diagnostics;
 
 namespace AddCounterRule
 {
@@ -7,11 +6,11 @@ namespace AddCounterRule
     {
         public string Name => "AddCounter";
 
-        public string Config => $"start={Start} step={Step} digits={NumOfDigits}";
+        public string Config => $"start={Start} step={Step} padding={Padding}";
 
         private int Start = 0;
         private int Step = 1;
-        private int NumOfDigits = 1;
+        private int Padding = 1;
         public string Parse
         {
             set
@@ -40,8 +39,8 @@ namespace AddCounterRule
                                 Step = Convert.ToInt32(param.Substring(index + 1));
                                 break;
 
-                            case "digits":
-                                NumOfDigits = Convert.ToInt32(param.Substring(index + 1));
+                            case "padding":
+                                Padding = Convert.ToInt32(param.Substring(index + 1));
                                 break;
                         }
                     }
@@ -50,7 +49,7 @@ namespace AddCounterRule
                 // Assert lowest limit to variables.
                 Start = Math.Max(0, Start);
                 Step = Math.Max(1, Step);
-                NumOfDigits = Math.Max(1, NumOfDigits);
+                Padding = Math.Max(1, Padding);
             }
         }
 
@@ -61,17 +60,17 @@ namespace AddCounterRule
             if (index == -1) index = origin.Length;
 
             int count = Start + fileIndex * Step;
-            return origin.Insert(index, ($"{MakeDigit(count, NumOfDigits)}"));
+            return origin.Insert(index, ($"{BuildNumber(count, Padding)}"));
         }
 
-        private string MakeDigit(int number, int digitCount)
+        private string BuildNumber(int number, int digitCount)
         {
             string strNumber = number.ToString();
-            int digitsToAdd = Math.Max(0, digitCount - strNumber.Length);
-            while (digitsToAdd > 0)
+            int paddingToAdd = Math.Max(0, digitCount - strNumber.Length);
+            while (paddingToAdd > 0)
             {
                 strNumber = '0' + strNumber;
-                digitsToAdd--;
+                paddingToAdd--;
             }
 
             return strNumber;
