@@ -7,6 +7,7 @@ using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Text;
+using System.Reflection;
 
 namespace FinalProject
 {
@@ -59,12 +60,13 @@ namespace FinalProject
 		}
 
 
-		
+
 		// ========================================
 		// ========== Build-in functions ==========
 		// ========================================
-		
+
 		// Read rule file
+		[Obsolete("Overshadowed by PresetProcessor's ReadPresetFile method.")]
 		private List<string> RuleFileReader(string ruleFilePath)
 		{
 			try
@@ -214,43 +216,43 @@ namespace FinalProject
 		// Select preset file
 		private void selectRulePresetButton_Click(object sender, RoutedEventArgs e)
 		{
-			var dialog = new OpenFileDialog();
-			dialog.Filter = "Rule Files (*.txt; *.json)|*.txt;*.json|All files (*.*)|*.*";
+			var dialog = new OpenFileDialog
+			{
+                Title = "Open Rule Preset File...",
+                Filter = "Rule Files (*.txt; *.json)|*.txt;*.json|All files (*.*)|*.*"
+        };
 
 			if (dialog.ShowDialog() == true)
 			{
-				var info = new FileInfo(dialog.FileName);
+                var info = new FileInfo(dialog.FileName);
 
-				// Setup factory
-				var fileContent = RuleFileReader(dialog.FileName);
+                List<IRule> newRuleList = PresetProcessor.ReadPresetFile(dialog, f, out bool success);
 
-				List<IRule> newRuleList = new List<IRule>();
-				foreach (string line in fileContent)
+				if (success)
 				{
-					newRuleList.Add(f.StringToIRuleConverter(line));
-				}
-				f.RuleList = newRuleList;
+                    f.RuleList = newRuleList;
 
-			// Display the rule file name to TextBox
-			ruleFileName.Text = info.Name;
+                    // Display the rule file name to TextBox
+                    ruleFileName.Text = info.Name;
 
-				//Update rule preview list
-				_selectedRules.Clear();
+                    //Update rule preview list
+                    _selectedRules.Clear();
 
-				foreach (var r in f.RuleList)
-				{
-					if (r == null) continue;
+                    foreach (var r in f.RuleList)
+                    {
+                        if (r == null) continue;
 
-					var item = new
-					{
-						RuleName = r.Name,
-						RuleConfig = r.Config
-					};
-					_selectedRules.Add(item);
-				}
-				rulePreviewListView.ItemsSource = _selectedRules;
+                        var item = new
+                        {
+                            RuleName = r.Name,
+                            RuleConfig = r.Config
+                        };
+                        _selectedRules.Add(item);
+                    }
+                    rulePreviewListView.ItemsSource = _selectedRules;
 
-				UpdateFactory();
+                    UpdateFactory();
+                }
 			}
 		}
 
@@ -326,13 +328,32 @@ namespace FinalProject
 			}
 		}
 
-		// === TODO ===
 		// Save the current list of rules in _selectedRules to a file
 		private void saveRulePresetButton_Click(object sender, RoutedEventArgs e)
 		{
-			return;
+			var dialog = new SaveFileDialog
+			{
+				Title = "Save Rule Preset File...",
+				Filter = "Raw Preset File (*.txt)|*.txt|JSON Preset File (*.json)|*.json"
+			};
+
+			// If a preset file has already been loaded before, use its name as default file name for saving.
+			if (ruleFileName.Text != "")
+			{
+				dialog.FileName = ruleFileName.Text;
+			}
+
+            if (dialog.ShowDialog() == true)
+            {
+                bool success = PresetProcessor.WritePresetFile(dialog, f);
+
+				if (success)
+				{
+					MessageBox.Show($"Successfully saved preset to path:\n{dialog.FileName}", "Success");
+				}
+            }
+            return;
 		}
-		// ============
 
 
 		// Open dialog to edit rule config
