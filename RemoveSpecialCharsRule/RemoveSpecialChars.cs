@@ -47,7 +47,7 @@ namespace RemoveSpecialCharsRule
 
 
 
-		public string Rename(string origin)
+		public string Rename(string origin, int fileIndex)
 		{
 			var result = new StringBuilder();
 			

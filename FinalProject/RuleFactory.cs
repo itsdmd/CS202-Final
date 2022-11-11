@@ -4,8 +4,6 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using System.Linq;
-using System.Text;
 
 namespace FinalProject
 {
@@ -31,7 +29,7 @@ namespace FinalProject
 						&& typeof(IRule).IsAssignableFrom(type))
 					{
 						dict.Add(type.Name.Replace("Rule", ""),
-									(IRule)Activator.CreateInstance(type));
+						(IRule)Activator.CreateInstance(type));
 					}
 				}
 			}
@@ -43,7 +41,9 @@ namespace FinalProject
 	public class RuleFactory
 	{
 		private string _fileName = new string("");
-		private List<IRule> _ruleList = new List<IRule>();
+		private int _fileIndex = 0;
+
+        private List<IRule> _ruleList = new List<IRule>();
 		private Dictionary<string, IRule> rulePrototypes = new DLLReader().GetRuleDict();
 
 		public IRule StringToIRuleConverter(string inputStr)
@@ -74,6 +74,7 @@ namespace FinalProject
 
 
 		public string FileName { set { _fileName = value; } }
+		public int FileIndex { set { _fileIndex = value; } }
 
 		public string Parse()
 		{
@@ -85,7 +86,7 @@ namespace FinalProject
 
 				foreach (IRule irule in _ruleList)
 				{
-					renamed = irule.Rename(renamed);
+					renamed = irule.Rename(renamed, _fileIndex);
 				}
 
 				return renamed;

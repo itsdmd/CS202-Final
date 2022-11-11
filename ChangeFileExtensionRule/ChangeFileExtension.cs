@@ -17,7 +17,7 @@ namespace ChangeFileExtensionRule
 			}
 		}
 
-		public string Rename(string origin)
+		public string Rename(string origin, int fileIndex)
 		{
 			// Replace substring after the last '.' with NewExtension
 			var index = origin.LastIndexOf('.');

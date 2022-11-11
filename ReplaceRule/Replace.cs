@@ -22,7 +22,7 @@ namespace ReplaceRule
 			}
 		}
 
-		public string Rename(string origin)
+		public string Rename(string origin, int fileIndex)
 		{
 			return (origin.Replace(From, To));
 		}

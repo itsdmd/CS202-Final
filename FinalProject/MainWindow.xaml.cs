@@ -6,10 +6,7 @@ using System.IO;
 using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
-using System.ComponentModel;
-using System.Linq;
 using System.Text;
-using System.Windows.Documents;
 
 namespace FinalProject
 {
@@ -26,7 +23,14 @@ namespace FinalProject
 		
 		string destinationFolderFullPath = "";
 
-		public MainWindow()
+		struct FileEntryInfo
+        {
+			public string FullPath { get; set; }
+			public string FileName { get; set; }
+			public int ItemIndex { get; set; }
+        }
+
+        public MainWindow()
 		{
 			InitializeComponent();
 		}
@@ -76,17 +80,19 @@ namespace FinalProject
 
 		
 		// Update file preview list (intergrated inside UpdateFactory)
-		private void UpdateFilePreviewList()
+		private void UpdateFilePreviewList(bool forced = false)
 		{
-			if (_originals.Count > 0)
+			if (_originals.Count > 0 || forced)
 			{
 				_previews.Clear();
 
+                int newIndex = 0;
 				foreach (dynamic item in _originals)
 				{
-					_previews.Add(item);
-				}
-			}
+					item.ItemIndex = newIndex++;
+                    _previews.Add(item);
+                }
+            }
 		}
 
 		
@@ -139,10 +145,11 @@ namespace FinalProject
 
 				var info = new FileInfo(dialog.FileName);
 
-				var rawItem = new
+				var rawItem = new FileEntryInfo
 				{
 					FullPath = dialog.FileName,
-					FileName = info.Name
+					FileName = info.Name,
+					ItemIndex = _originals.Count
 				};
 
 				_originals.Add(rawItem);
@@ -158,8 +165,7 @@ namespace FinalProject
 			{
 				_originals.RemoveAt(filesListView.SelectedIndex);
 
-				_previews.Clear();
-				foreach (var item in _originals) { _previews.Add(item); }
+				UpdateFilePreviewList(true);
 			}
 		}
 
@@ -186,11 +192,12 @@ namespace FinalProject
 
 					var info = new FileInfo(file);
 
-					var rawItem = new
+					var rawItem = new FileEntryInfo
 					{
 						FullPath = file,
-						FileName = info.Name
-					};
+						FileName = info.Name,
+                        ItemIndex = _originals.Count
+                    };
 
 					_originals.Add(rawItem);
 					_previews.Add(rawItem);
@@ -388,6 +395,7 @@ namespace FinalProject
 			foreach (dynamic item in _originals)
 			{
 				f.FileName = item.FileName;
+				f.FileIndex = item.ItemIndex;
 
 				var info = new FileInfo(item.FullPath);
 				var folder = info.Directory;

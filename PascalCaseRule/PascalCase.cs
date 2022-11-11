@@ -10,7 +10,7 @@ namespace PascalCaseRule
 
 		public string Parse { get; set; }
 
-		public string Rename(string origin)
+		public string Rename(string origin, int fileIndex)
 		{
 			var words = origin.Split(new[] { "_", " " }, StringSplitOptions.RemoveEmptyEntries);
 			words = words.Select(word => char.ToUpper(word[0]) + word.Substring(1))

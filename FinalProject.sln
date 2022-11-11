@@ -15,15 +15,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneSpaceRule", "OneSpaceRul
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReplaceRule", "ReplaceRule\ReplaceRule.csproj", "{3BC8A1AC-0914-415F-9741-ED4BCA9F221C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoveSurroundingSpacesRule", "RemoveSurroundingSpacesRule\RemoveSurroundingSpacesRule.csproj", "{9DE1B8A0-81AE-4542-BB72-59B8DB87D5B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoveSurroundingSpacesRule", "RemoveSurroundingSpacesRule\RemoveSurroundingSpacesRule.csproj", "{9DE1B8A0-81AE-4542-BB72-59B8DB87D5B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LowerCaseRemoveSpacesRule", "LowerCaseRemoveSpacesRule\LowerCaseRemoveSpacesRule.csproj", "{ABE2367F-30D6-45CA-A5D7-4CD5D7D68569}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LowerCaseRemoveSpacesRule", "LowerCaseRemoveSpacesRule\LowerCaseRemoveSpacesRule.csproj", "{ABE2367F-30D6-45CA-A5D7-4CD5D7D68569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddSuffixRule", "AddSuffixRule\AddSuffixRule.csproj", "{39B43C45-02A5-4A24-9533-E38429C6389F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddSuffixRule", "AddSuffixRule\AddSuffixRule.csproj", "{39B43C45-02A5-4A24-9533-E38429C6389F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeFileExtensionRule", "ChangeFileExtensionRule\ChangeFileExtensionRule.csproj", "{08411C6D-31FB-4BA3-9313-DCC085B09E7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeFileExtensionRule", "ChangeFileExtensionRule\ChangeFileExtensionRule.csproj", "{08411C6D-31FB-4BA3-9313-DCC085B09E7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PascalCaseRule", "PascalCaseRule\PascalCaseRule.csproj", "{6460E246-F7F6-407B-A12D-593A77457F74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PascalCaseRule", "PascalCaseRule\PascalCaseRule.csproj", "{6460E246-F7F6-407B-A12D-593A77457F74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddCounterRule", "AddCounterRule\AddCounterRule.csproj", "{50038005-0DE8-4C4C-BE36-8DE588507806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{6460E246-F7F6-407B-A12D-593A77457F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6460E246-F7F6-407B-A12D-593A77457F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6460E246-F7F6-407B-A12D-593A77457F74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50038005-0DE8-4C4C-BE36-8DE588507806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50038005-0DE8-4C4C-BE36-8DE588507806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50038005-0DE8-4C4C-BE36-8DE588507806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50038005-0DE8-4C4C-BE36-8DE588507806}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

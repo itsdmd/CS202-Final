@@ -10,7 +10,7 @@ namespace LowerCaseRemoveSpacesRule
 
 		public string Parse { get; set; }
 
-		public string Rename(string origin)
+		public string Rename(string origin, int fileIndex)
 		{
 			origin = origin.ToLower();
 			origin = origin.Replace(" ", "");

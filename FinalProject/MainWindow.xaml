@@ -14,7 +14,7 @@
 				   FontSize="50" FontWeight="Bold" Canvas.Left="58" Canvas.Top="74"/>
 
 		<TextBlock Text="Rules"
-				   FontSize="50" FontWeight="Bold" Canvas.Left="440" Canvas.Top="74" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+				   FontSize="50" FontWeight="Bold" Canvas.Left="453" Canvas.Top="74" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<TextBlock Text="To"
 				   FontSize="50" FontWeight="Bold" Canvas.Left="909" Canvas.Top="79" HorizontalAlignment="Right" VerticalAlignment="Center"/>
@@ -38,7 +38,7 @@
 				Width="100" Height="50" Canvas.Left="258" Canvas.Top="674" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<Button x:Name="selectRulePresetButton" Content="Select Rule Preset File" Click="selectRulePresetButton_Click"
-				Width="150" Height="30" Canvas.Left="428" Canvas.Top="146" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+				Width="150" Height="30" Canvas.Left="442" Canvas.Top="146" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<TextBlock x:Name="ruleFileName" FontSize="17"
 				 Width="150" Height="20" Canvas.Left="428" Canvas.Top="176" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -107,12 +107,19 @@
 				  HorizontalAlignment="Center" Canvas.Left="664" VerticalAlignment="Center" Canvas.Top="146">
 			<ListView.ItemTemplate>
 				<DataTemplate>
-					<TextBlock Text="{Binding FileName, Converter={StaticResource converter}}" />
+					<TextBlock>
+						<TextBlock.Text>
+							<MultiBinding Converter="{StaticResource converter}">
+								<Binding Path="FileName"/>
+								<Binding Path="ItemIndex"/>
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
 
-		<CheckBox x:Name="moveToAnotherFolderCheckBox" Content="Move to destination folder?"
+		<CheckBox x:Name="moveToAnotherFolderCheckBox" Content="Move to another folder?"
 				  Canvas.Left="406" Canvas.Top="674" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 		<TextBox x:Name="destinationFolderPathTextBlock" TextChanged="destinationFolderPathTextBlock_TextChanged"

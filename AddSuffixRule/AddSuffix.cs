@@ -19,7 +19,7 @@ namespace AddSuffixRule
 			}
 		}
 
-		public string Rename(string origin)
+		public string Rename(string origin, int fileIndex)
 		{
 			// Add Suffix before the last '.' to prevent changing file's extension
 			var index = origin.LastIndexOf('.');
