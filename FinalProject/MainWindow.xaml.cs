@@ -325,7 +325,15 @@ namespace FinalProject
 			}
 		}
 
-		
+		// === TODO ===
+		// Save the current list of rules in _selectedRules to a file
+		private void saveRulePresetButton_Click(object sender, RoutedEventArgs e)
+		{
+			return;
+		}
+		// ============
+
+
 		// Open dialog to edit rule config
 		private void editRulePreviewItemContextMenu_Click(object sender, RoutedEventArgs e)
 		{
@@ -377,15 +385,15 @@ namespace FinalProject
 			if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
 			{
 				destinationFolderFullPath = dialog.FileName;
-				destinationFolderPathTextBlock.Text = destinationFolderFullPath;
+				destinationFolderPathTextBox.Text = destinationFolderFullPath;
 			}
 		}
 
 		
-		// Text inside destinationFolderPathTextBlock was modified
-		private void destinationFolderPathTextBlock_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		// Text inside destinationFolderPathTextBox was modified
+		private void destinationFolderPathTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
 		{
-			destinationFolderFullPath = destinationFolderPathTextBlock.Text;
+			destinationFolderFullPath = destinationFolderPathTextBox.Text;
 		}
 
 		

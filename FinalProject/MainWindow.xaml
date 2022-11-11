@@ -84,7 +84,7 @@
 			</ListView.ItemsPanel>
 			<ListView.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="{Binding RuleName}"
 								Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 						<TextBlock Text=" - [ "/>
@@ -96,11 +96,14 @@
 			</ListView.ItemTemplate>
 		</ListView>
 
-		<Button x:Name="moveRuleUpButton" Content="Move Up" Click="moveRuleUpButton_Click"
-				Width="100" Height="25" Canvas.Left="406" Canvas.Top="621" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+		<Button x:Name="moveRuleUpButton" FontFamily="Marlett" FontSize="20" Content="5" Click="moveRuleUpButton_Click"
+				Width="25" Height="25" Canvas.Left="406" Canvas.Top="621" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-		<Button x:Name="moveRuleDownButton" Content="Move Down" Click="moveRuleDownButton_Click"
-				Width="100" Height="25" Canvas.Left="526" Canvas.Top="621" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.513,1.188"/>
+		<Button x:Name="moveRuleDownButton" FontFamily="Marlett" FontSize="20" Content="6" Click="moveRuleDownButton_Click"
+				Width="25" Height="25" Canvas.Left="436" Canvas.Top="621" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+		<Button x:Name="saveRulePresetButton" Content="Save as Preset" Click="saveRulePresetButton_Click"
+				Width="100" Height="25" Canvas.Left="526" Canvas.Top="621" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 		<ListView x:Name="previewListView"
 				  Width="300" Height="500"
@@ -122,7 +125,7 @@
 		<CheckBox x:Name="moveToAnotherFolderCheckBox" Content="Move to another folder?"
 				  Canvas.Left="406" Canvas.Top="674" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-		<TextBox x:Name="destinationFolderPathTextBlock" TextChanged="destinationFolderPathTextBlock_TextChanged"
+		<TextBox x:Name="destinationFolderPathTextBox" TextChanged="destinationFolderPathTextBox_TextChanged"
 				 Width="253" Height="30" Canvas.Left="406" Canvas.Top="694" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<Button x:Name="selectDestinationFolderButton" Content="Select Folder" Click="selectDestinationFolderButton_Click"
