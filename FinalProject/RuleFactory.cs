@@ -58,10 +58,28 @@ namespace FinalProject
 			}
 			catch (KeyNotFoundException)
 			{
-				MessageBox.Show("Rule " + inputStr.Split(' ')[0] + " not found!");
+				MessageBox.Show("Rule " + inputStr.Split(' ')[0] + " not found!", "StringToIRuleConverter", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 				return null;
 			}
 		}
+
+        // Overload of StringToIRuleConverter (No message box version)
+        public IRule? StringToIRuleConverter(string inputStr, out bool found)
+        {
+			found = false;
+            try
+            {
+                IRule? newIRule = rulePrototypes[inputStr.Split(' ')[0]].Clone() as IRule;
+
+                newIRule!.Parse = inputStr;
+				found = true;
+                return newIRule;
+            }
+            catch (KeyNotFoundException)
+            {
+            }
+			return null;
+        }
 
         // Reverse conversion
         public string IRuleToStringConverter(bool toJsonFormat = false)

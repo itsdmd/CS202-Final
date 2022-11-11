@@ -12,6 +12,8 @@ namespace FinalProject
 {
     public static class PresetProcessor
     {
+        public const int NOT_FOUND_LIMIT = 8;
+
         public static List<IRule> ReadPresetFile(OpenFileDialog target, RuleFactory ruleFactory, out bool success)
         {
             success = false;
@@ -22,6 +24,7 @@ namespace FinalProject
             if (extension != "") extension = extension.Substring(1);
 
             List<IRule> newRuleList = new List<IRule>();
+            List<string> notFoundList = new List<string>();
             // Load rule preset files with the following file types:
             switch (extension)
             {
@@ -35,12 +38,20 @@ namespace FinalProject
                         if (deserializedRules != null)
                         {
                             //newRuleList = ruleList;
+
                             foreach (RuleDeserializeTemplate ruleTemplate in deserializedRules)
                             {
                                 string rawRule = $"{ruleTemplate.Name} {ruleTemplate.Config}";
                                 Debug.WriteLine(rawRule);
-                                newRuleList.Add(ruleFactory.StringToIRuleConverter(rawRule));
+                                IRule? rule = ruleFactory.StringToIRuleConverter(rawRule, out bool found);
+                                if (rule != null)
+                                    newRuleList.Add(rule);
+
+                                if (!found || rule == null)
+                                    if (!notFoundList.Contains(ruleTemplate.Name))
+                                        notFoundList.Add(ruleTemplate.Name);
                             }
+
                             success = true;
                         }
                         /*
@@ -49,7 +60,7 @@ namespace FinalProject
                             MessageBox.Show("Deserialized list is null.");
                         }
                         */
-                    } 
+                    }
                     catch (Exception e)
                     {
                         MessageBox.Show($"Unable to deserialize JSON Preset.\n\n{e.Message}", e.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
@@ -71,13 +82,32 @@ namespace FinalProject
 
                     foreach (string line in fileContent)
                     {
-                        newRuleList.Add(ruleFactory.StringToIRuleConverter(line));
+                        IRule? rule = ruleFactory.StringToIRuleConverter(line, out bool found);
+                        if (rule != null)
+                            newRuleList.Add(rule);
+
+                        if (!found || rule == null)
+                            if (!notFoundList.Contains(line.Split(' ')[0]))
+                                notFoundList.Add(line.Split(' ')[0]);
                     }
                     break;
-                
+
                 default:
                     MessageBox.Show($"Unsupported file type ({extension})", "Rule Preset Reader", MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
+            }
+
+            if (notFoundList.Count > 0)
+            {
+                string overflowNotice = "";
+                int overflow = notFoundList.Count - NOT_FOUND_LIMIT;
+                if (overflow > 0)
+                {
+                    overflowNotice = $"\nAnd {overflow} more...";
+                    notFoundList.RemoveRange(NOT_FOUND_LIMIT - 1, overflow);
+                }
+                
+                MessageBox.Show($"Unable to load the following rules:\n\n- {string.Join("\n- ", notFoundList)}{overflowNotice}", "StringToIRuleConverter", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
 
             return newRuleList;
@@ -123,7 +153,7 @@ namespace FinalProject
                 {
                     fs.Close();
                 }
-                
+
             };
             return success;
         }
