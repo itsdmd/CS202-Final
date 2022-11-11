@@ -15,7 +15,7 @@
 
 ![](doc/res/vs-nuget.png)
 
-7. ***Clean solution** > Build solution*. Copy all **.dll files** of every plugin into FinalProject's Debug folder (`FinalProject\bin\Debug\net6.0-windows`)
+7. ***Clean solution** > Build solution*. Copy all **.dll files** of every plugin into FinalProject's Debug folder (`FinalProject\bin\Debug\net6.0-windows`). :warning::warning::warning: _**This step must be repeated everytime there are any changes to the IRule interface or any rule file!**_ :warning::warning::warning:
 
 8. Pray that it runs :smiling_face_with_tear:
 
