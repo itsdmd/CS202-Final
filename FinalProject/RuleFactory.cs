@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Text.Json;
 
 namespace FinalProject
 {
@@ -59,6 +60,26 @@ namespace FinalProject
 			{
 				MessageBox.Show("Rule " + inputStr.Split(' ')[0] + " not found!");
 				return null;
+			}
+		}
+
+        // Reverse conversion
+        public string IRuleToStringConverter(bool toJsonFormat = false)
+		{
+			if (toJsonFormat)
+			{
+				string jsonContent = JsonSerializer.Serialize(_ruleList);
+				return jsonContent;
+			} else
+			{
+				string rawContent = "";
+				foreach (IRule rule in _ruleList)
+				{
+					string name = rule.Name;
+					string cfg = rule.Config;
+					rawContent += $"{name} {cfg}\n";
+				}
+				return rawContent;
 			}
 		}
 		
