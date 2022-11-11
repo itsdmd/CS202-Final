@@ -215,6 +215,7 @@ namespace FinalProject
 		private void selectRulePresetButton_Click(object sender, RoutedEventArgs e)
 		{
 			var dialog = new OpenFileDialog();
+			dialog.Filter = "Rule Files (*.txt; *.json)|*.txt;*.json|All files (*.*)|*.*";
 
 			if (dialog.ShowDialog() == true)
 			{
