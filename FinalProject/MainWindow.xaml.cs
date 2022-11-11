@@ -6,11 +6,7 @@ using System.IO;
 using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
-using System.ComponentModel;
-using System.Linq;
 using System.Text;
-using System.Windows.Documents;
-using System.Diagnostics;
 
 namespace FinalProject
 {
