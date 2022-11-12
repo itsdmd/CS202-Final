@@ -26,9 +26,6 @@ namespace AddSuffixRule
 			return origin.Insert(index, (" " + Suffix));
 		}
 
-		public object Clone()
-		{
-			return MemberwiseClone();
-		}
+		public object Clone() => MemberwiseClone();
 	}
 }
