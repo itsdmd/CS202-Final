@@ -25,9 +25,6 @@ namespace AddPrefixRule
 			return (Prefix + " " + inp);
 		}
 
-		public object Clone()
-		{
-			return MemberwiseClone();
-		}
+		public object Clone() => MemberwiseClone();
 	}
 }

@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Text.Json;
 
 namespace FinalProject
 {
@@ -57,8 +58,50 @@ namespace FinalProject
 			}
 			catch (KeyNotFoundException)
 			{
-				MessageBox.Show("Rule " + inputStr.Split(' ')[0] + " not found!");
+				MessageBox.Show("Rule " + inputStr.Split(' ')[0] + " not found!",   // Text
+								"StringToIRuleConverter",                           // Caption
+								MessageBoxButton.OK,                                // Button
+								MessageBoxImage.Exclamation);                       // Icon
 				return null;
+			}
+		}
+
+        // Overload of StringToIRuleConverter (No message box version)
+        public IRule? StringToIRuleConverter(string inputStr, out bool found)
+        {
+			found = false;
+			
+            try
+            {
+                IRule? newIRule = rulePrototypes[inputStr.Split(' ')[0]].Clone() as IRule;
+
+                newIRule!.Parse = inputStr;
+				found = true;
+                return newIRule;
+            }
+            catch (KeyNotFoundException) { return null; }
+        }
+
+        // Reverse conversion
+        public string IRuleToStringConverter(bool toJsonFormat = false)
+		{
+			if (toJsonFormat)
+			{
+				string jsonContent = JsonSerializer.Serialize(_ruleList);
+				return jsonContent;
+			}
+			
+			// .txt
+			else
+			{
+				string rawContent = "";
+				foreach (IRule rule in _ruleList)
+				{
+					string name = rule.Name;
+					string cfg = rule.Config;
+					rawContent += $"{name} {cfg}\n";
+				}
+				return rawContent;
 			}
 		}
 		
@@ -73,8 +116,8 @@ namespace FinalProject
 
 
 
-		public string FileName { set { _fileName = value; } }
-		public int FileIndex { set { _fileIndex = value; } }
+		public string FileName { set => _fileName = value; }
+		public int FileIndex { set => _fileIndex = value; }
 
 		public string Parse()
 		{

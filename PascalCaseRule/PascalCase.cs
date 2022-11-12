@@ -19,9 +19,6 @@ namespace PascalCaseRule
 			return string.Join(string.Empty, words);
 		}
 
-		public object Clone()
-		{
-			return MemberwiseClone();
-		}
+		public object Clone() => MemberwiseClone();
 	}
 }
