@@ -15,9 +15,6 @@ namespace RemoveSurroundingSpacesRule
 			return inp.Trim();
 		}
 
-		public object Clone()
-		{
-			return MemberwiseClone();
-		}
+		public object Clone() => MemberwiseClone();
 	}
 }

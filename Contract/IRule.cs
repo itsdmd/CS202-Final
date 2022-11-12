@@ -17,14 +17,8 @@
 
         public string Parse { set { } }
 
-        public string Rename(string origin, int fileIndex)
-        {
-			return origin;
-        }
+        public string Rename(string origin, int fileIndex) => origin;
 
-        public object Clone()
-		{
-			return MemberwiseClone();
-		}
+        public object Clone() => MemberwiseClone();
 	}
 }

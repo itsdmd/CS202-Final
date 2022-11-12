@@ -24,9 +24,6 @@ namespace ChangeFileExtensionRule
 			return origin.Remove(index + 1) + NewExtension;
 		}
 
-		public object Clone()
-		{
-			return MemberwiseClone();
-		}
+		public object Clone() => MemberwiseClone();
 	}
 }

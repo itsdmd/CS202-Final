@@ -14,7 +14,7 @@ namespace FinalProject
     {
         public const int NOT_FOUND_LIMIT = 8;
 
-        public static List<IRule> ReadPresetFile(OpenFileDialog target, RuleFactory ruleFactory, out bool success)
+		public static List<IRule> ReadPresetFile(OpenFileDialog target, RuleFactory ruleFactory, out bool success)
         {
             success = false;
             string fileName = target.FileName;
@@ -25,7 +25,8 @@ namespace FinalProject
 
             List<IRule> newRuleList = new List<IRule>();
             List<string> notFoundList = new List<string>();
-            // Load rule preset files with the following file types:
+			
+            // Load rule preset files
             switch (extension)
             {
                 // JSON RULE PRESET FILE
@@ -37,11 +38,12 @@ namespace FinalProject
 
                         if (deserializedRules != null)
                         {
-                            //newRuleList = ruleList;
-
                             foreach (RuleDeserializeTemplate ruleTemplate in deserializedRules)
                             {
-                                string rawRule = $"{ruleTemplate.Name} {ruleTemplate.Config}";
+                                string configJsonPatch = ruleTemplate.Config;
+
+
+								string rawRule = $"{ruleTemplate.Name} {ruleTemplate.Config}";
                                 Debug.WriteLine(rawRule);
                                 IRule? rule = ruleFactory.StringToIRuleConverter(rawRule, out bool found);
                                 if (rule != null)
@@ -54,17 +56,16 @@ namespace FinalProject
 
                             success = true;
                         }
-                        /*
-                        else
-                        {
-                            MessageBox.Show("Deserialized list is null.");
-                        }
-                        */
+                        
+                        else { MessageBox.Show("Deserialized list is null."); }
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show($"Unable to deserialize JSON Preset.\n\n{e.Message}", e.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                        MessageBox.Show($"Unable to deserialize JSON Preset.\n\n{e.Message}",
+							            e.ToString(),               // Caption
+							            MessageBoxButton.OK,        // Button
+							            MessageBoxImage.Error);     // Icon
+					}
                     break;
 
                 // RAW RULE PRESET FILE
@@ -77,7 +78,10 @@ namespace FinalProject
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Rule file not found", e.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Rule file not found",
+                                        e.ToString(),
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error);
                     }
 
                     foreach (string line in fileContent)
@@ -93,13 +97,17 @@ namespace FinalProject
                     break;
 
                 default:
-                    MessageBox.Show($"Unsupported file type ({extension})", "Rule Preset Reader", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show($"Unsupported file type ({extension})",
+                                    "Rule Preset Reader",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
                     break;
             }
 
             if (notFoundList.Count > 0)
             {
                 string overflowNotice = "";
+				
                 int overflow = notFoundList.Count - NOT_FOUND_LIMIT;
                 if (overflow > 0)
                 {
@@ -107,7 +115,10 @@ namespace FinalProject
                     notFoundList.RemoveRange(NOT_FOUND_LIMIT - 1, overflow);
                 }
                 
-                MessageBox.Show($"Unable to load the following rules:\n\n- {string.Join("\n- ", notFoundList)}{overflowNotice}", "StringToIRuleConverter", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show($"Unable to load the following rules:\n\n- {string.Join("\n- ", notFoundList)}{overflowNotice}",
+                    "StringToIRuleConverter",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Exclamation);
             }
 
             return newRuleList;
@@ -122,12 +133,12 @@ namespace FinalProject
             if (extension != "") extension = extension.Substring(1);
 
             string result = "";
-            // Save rule preset file in the following file types:
+            // Save rule preset file
             switch (extension)
             {
                 case "json":
-                    result = ruleFactory.IRuleToStringConverter(true);
-                    break;
+					result = ruleFactory.IRuleToStringConverter(true);
+					break;
 
                 default:
                 case "txt":
@@ -146,7 +157,10 @@ namespace FinalProject
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"An error has occured while saving Rule Preset File.\nTarget Path: {fileName}\nException: {e}\nDetails: {e.Message}", e.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"An error has occured while saving Rule Preset File.\nTarget Path: {fileName}\nException: {e}\nDetails: {e.Message}",
+                                    e.ToString(),
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
                     success = false;
                 }
                 finally
@@ -155,6 +169,7 @@ namespace FinalProject
                 }
 
             };
+			
             return success;
         }
     }

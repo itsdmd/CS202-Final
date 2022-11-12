@@ -18,6 +18,7 @@ namespace FinalProject
 			
 			Factory.FileName = fileName;
 			Factory.FileIndex = fileIndex;
+			
 			return Factory.Parse();
 		}
 

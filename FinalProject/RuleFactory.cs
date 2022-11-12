@@ -58,7 +58,10 @@ namespace FinalProject
 			}
 			catch (KeyNotFoundException)
 			{
-				MessageBox.Show("Rule " + inputStr.Split(' ')[0] + " not found!", "StringToIRuleConverter", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+				MessageBox.Show("Rule " + inputStr.Split(' ')[0] + " not found!",   // Text
+								"StringToIRuleConverter",                           // Caption
+								MessageBoxButton.OK,                                // Button
+								MessageBoxImage.Exclamation);                       // Icon
 				return null;
 			}
 		}
@@ -67,6 +70,7 @@ namespace FinalProject
         public IRule? StringToIRuleConverter(string inputStr, out bool found)
         {
 			found = false;
+			
             try
             {
                 IRule? newIRule = rulePrototypes[inputStr.Split(' ')[0]].Clone() as IRule;
@@ -75,10 +79,7 @@ namespace FinalProject
 				found = true;
                 return newIRule;
             }
-            catch (KeyNotFoundException)
-            {
-            }
-			return null;
+            catch (KeyNotFoundException) { return null; }
         }
 
         // Reverse conversion
@@ -88,7 +89,10 @@ namespace FinalProject
 			{
 				string jsonContent = JsonSerializer.Serialize(_ruleList);
 				return jsonContent;
-			} else
+			}
+			
+			// .txt
+			else
 			{
 				string rawContent = "";
 				foreach (IRule rule in _ruleList)
@@ -112,8 +116,8 @@ namespace FinalProject
 
 
 
-		public string FileName { set { _fileName = value; } }
-		public int FileIndex { set { _fileIndex = value; } }
+		public string FileName { set => _fileName = value; }
+		public int FileIndex { set => _fileIndex = value; }
 
 		public string Parse()
 		{
