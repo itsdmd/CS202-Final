@@ -5,9 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using System;
 using System.Text;
-using System.Reflection;
 
 namespace FinalProject
 {
@@ -62,24 +60,8 @@ namespace FinalProject
 
 
 		// ========================================
-		// ========== Build-in functions ==========
+		// =============== Utilities ==============
 		// ========================================
-
-		// Read rule file
-		[Obsolete("Overshadowed by PresetProcessor's ReadPresetFile method.")]
-		private List<string> RuleFileReader(string ruleFilePath)
-		{
-			try
-			{
-				return new List<string>(File.ReadAllLines(ruleFilePath));
-			}
-			catch (Exception e)
-			{
-				MessageBox.Show("Rule file not found", e.ToString());
-				return null;
-			}
-		}
-
 		
 		// Update file preview list (intergrated inside UpdateFactory)
 		private void UpdateFilePreviewList(bool forced = false)
@@ -265,6 +247,7 @@ namespace FinalProject
 			ruleConfigTextBox.Text = selectedRuleFromAvailable.RuleConfig;
 		}
 
+		
 		// Add selected rule to rule preview list
 		private void addRuleButton_Click(object sender, RoutedEventArgs e)
 		{
