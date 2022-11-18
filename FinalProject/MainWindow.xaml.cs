@@ -405,6 +405,8 @@ namespace FinalProject
 		// Start renaming
 		private void renameButton_Click(object sender, RoutedEventArgs e)
 		{
+			List<string> errorFiles = new List<string>();
+			
 			foreach (dynamic item in _originals)
 			{
 				f.FileName = item.FileName;
@@ -412,6 +414,7 @@ namespace FinalProject
 
 				var info = new FileInfo(item.FullPath);
 				var folder = info.Directory;
+				var newPath = "";
 
 				// If moveToAnotherFolderCheckBox is checked, create a subdirectory called "renamed" and copy the files to it
 				if (moveToAnotherFolderCheckBox.IsChecked == true)
@@ -421,27 +424,49 @@ namespace FinalProject
 						MessageBox.Show("Please select a folder to move the renamed files to.");
 						return;
 					}
+
+					// If folder exists, set it as the destination folder
 					try
 					{
-						var newPath = $"{destinationFolderFullPath}\\{f.Parse()}";
+						newPath = $"{destinationFolderFullPath}\\{f.Parse()}";
 						File.Copy(item.FullPath, newPath);
 					}
+					// Else, create it
 					catch
 					{
 						folder = Directory.CreateDirectory(destinationFolderFullPath);
-						
-						var newPath = $"{folder}\\{f.Parse()}";
-						File.Copy(item.FullPath, newPath);
+						newPath = $"{folder}\\{f.Parse()}";
 					}
 				}
 				else
 				{
-					var newPath = $"{folder}\\{f.Parse()}";
+					newPath = $"{folder}\\{f.Parse()}";
 					File.Move(item.FullPath, newPath);
+				}
+
+				// If catch error while copying file, save the file's name to a string to print out to a MessageBox
+				try
+				{
+					File.Copy(item.FullPath, newPath);
+				}
+				catch
+				{
+					errorFiles.Add(item.FileName);
+					continue;
+				}
+
+				if (errorFiles.Count > 0)
+				{
+					string errorFilesString = "";
+					foreach (string file in errorFiles)
+					{
+						errorFilesString += $"{file}\n";
+					}
+					MessageBox.Show($"Failed to move the following files to the destination folder:\n{errorFilesString}");
 				}
 			}
 
-			MessageBox.Show($"Renamed {_originals.Count} files");
+			MessageBox.Show($"Renamed {_originals.Count - errorFiles.Count} files");
 		}
 	}
 }
